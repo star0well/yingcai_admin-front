@@ -30,7 +30,7 @@ const userMenus = computed(() => store.userMenus);
 //data
 const currentPath = route.path;
 const menu = pathMapToMenu(userMenus.value, currentPath);
-const defaultValue = ref(menu?.id);
+const defaultValue = ref(menu?.id + "");
 const isCollapse = computed(() => store.isFlod);
 //event handle
 const handleMenuItemClick = (item) => {

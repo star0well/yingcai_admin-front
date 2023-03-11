@@ -1,7 +1,7 @@
 <template>
   <template v-for="item of menuList" :key="item.id">
     <template v-if="item.type == 1">
-      <el-sub-menu :index="item.id">
+      <el-sub-menu :index="item.id + ''">
         <template #title>
           <el-icon>
             <component :is="icons[item.icon]" />
@@ -20,7 +20,7 @@
       <el-menu-item
         v-if="item.type == 2"
         :key="item.id"
-        :index="item.id"
+        :index="item.id + ''"
         @click="handleMenuItemClick(item)"
       >
         <el-icon v-if="item.icon">

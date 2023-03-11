@@ -3,7 +3,7 @@ import store from "@/store";
 import router from "@/router";
 import "@/global/register-el-style";
 import { useUserStore } from "@/store/user";
-
+import "@/assets/css/index.css";
 import App from "./App.vue";
 
 async function bootstrap() {

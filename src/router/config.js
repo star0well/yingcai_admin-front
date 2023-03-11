@@ -19,5 +19,29 @@ const menus = [
     icon: "HomeFilled",
     path: "/main/menu/menu",
   },
+
+ {
+    name:"角色管理",
+    id:"80",
+    type:2,
+    icon:"HomeFilled",
+    path:"/main/roles/roles"
+  },
+
+ {
+    name:"用户管理",
+    id:"35",
+    type:2,
+    icon:"HomeFilled",
+    path:"/main/user/user"
+  },
+
+ {
+    name:"商品",
+    id:"5",
+    type:2,
+    icon:"HomeFilled",
+    path:"/main/goods/goods"
+  },
 ];
 export { menus };

@@ -5,7 +5,6 @@
     :close-on-click-modal="false"
     :width="width"
     @close="hanldeDialogClose"
-    destroy-on-close
   >
     <template>
       <slot name="inner"></slot>
@@ -80,6 +79,7 @@
                 v-model="formData[formItem.field]"
                 filterable
                 clearable
+                v-bind="formItem.otherProps"
                 :placeholder="formItem.placeholder"
                 :disabled="
                   formItem.disabled || disabledArray.includes(formItem.field)
@@ -251,6 +251,7 @@ const hanldeblur = (filed) => {
 };
 
 const hanldeDialogClose = () => {
+  formData.value = {};
   emit("close");
 };
 const close = () => {

@@ -1,29 +1,19 @@
 export const contentTableConfig = {
   propList: [
     // { prop: "goodsName", type: "expand", slotName: "more_img" },
-    { prop: "name", label: "菜单a名称" },
+    { prop: "name", label: "角色名称" },
     {
-      prop: "icon",
-      label: "图标",
-    },
-    { prop: "path", label: "路径" },
-    { prop: "type", label: "类型" },
-
-    {
-      prop: "sort",
-      label: "排序",
+      prop: "describe",
+      label: "描述",
     },
     {
-      prop: "pid",
-      label: "父id",
+      prop: "menuIds",
+      label: "菜单id",
       formatter: (row) => {
-        return row.pid || "/";
+        return row.menuList.map((item) => item.name).join(",");
       },
     },
-    {
-      prop: "cPath",
-      label: "请求地址",
-    },
+
     {
       prop: "createdAt",
       label: "创建时间",
@@ -75,49 +65,10 @@ export const modalList = [
   },
   {
     type: "input",
-    label: "图标",
-    field: "icon",
+    label: "描述",
+    field: "describe",
     requireRules: true, //是否使用rules
     rules: [{ required: true, message: "请输入图标", trigger: "blur" }],
-    span: 24,
-  },
-  {
-    type: "input",
-    label: "类型",
-    field: "type",
-    requireRules: true, //是否使用rules
-    rules: [{ required: true, message: "请输入类型", trigger: "blur" }],
-    span: 24,
-  },
-  {
-    type: "input",
-    label: "路由地址",
-    field: "path",
-    requireRules: true, //是否使用rules
-    rules: [{ required: true, message: "请输入路径", trigger: "blur" }],
-    span: 24,
-  },
-  {
-    type: "input",
-    label: "请求地址",
-    field: "cPath",
-    requireRules: true, //是否使用rules
-    rules: [{ required: true, message: "请输入请求地址路径", trigger: "blur" }],
-    span: 24,
-  },
-  {
-    type: "input",
-    label: "排序",
-    field: "sort",
-    requireRules: true, //是否使用rules
-    rules: [{ required: true, message: "请输入排序", trigger: "blur" }],
-    span: 24,
-  },
-  {
-    type: "select",
-    label: "父id",
-    field: "pid",
-    requireRules: true, //是否使用rules
     span: 24,
   },
 ];
