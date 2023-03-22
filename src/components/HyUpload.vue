@@ -3,8 +3,8 @@
     class="upload"
     :class="limit > fileList.length && !disabled ? 'can' : 'disabel'"
     v-model:file-list="fileList"
-    :action="props.action"
-    :headers="props.headers"
+    :action="action"
+    :headers="headers"
     list-type="picture-card"
     :limit="limit"
     :on-preview="handlePictureCardPreview"
@@ -13,7 +13,8 @@
     :before-upload="hanldeBefore"
     multiple
     :disabled="disabled"
-    accept="image/*">
+    accept="image/*"
+  >
     <el-icon v-if="limit > fileList.length && !disabled"><Plus /></el-icon>
   </el-upload>
 
@@ -23,7 +24,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
+import { nextTick, ref, watchEffect } from "vue";
 import { Plus } from "@element-plus/icons-vue";
 import { API_BASE_URL } from "@/service/request/config";
 import { ElMessage } from "element-plus";
@@ -34,7 +35,7 @@ const props = defineProps({
   },
   action: {
     type: String,
-    default: API_BASE_URL + "/api/upload/upImg",
+    default: API_BASE_URL + "/upload/image",
   },
   headers: {
     type: Object,
@@ -56,33 +57,39 @@ const props = defineProps({
   },
 });
 const emit = defineEmits(["change", "update:list"]);
-
-watch(
-  () => props.list,
-  (newV) => {
-    fileList.value = newV;
-  },
-);
+const uploadChange = ref(false);
 
 const fileList = ref([]);
 const dialogImageUrl = ref("");
 const dialogVisible = ref(false);
+watchEffect(() => {
+  if (uploadChange.value) return;
+  fileList.value = props.list;
+});
 
 const change = () => {
-  if (fileList.value.filter((item) => item.status == "success").length != fileList.value.length) return;
+  if (
+    fileList.value.filter((item) => item.status == "success").length !=
+    fileList.value.length
+  )
+    return;
 
   const imgArray = fileList.value.map((item) => {
     return item._url
-      ? { url: item._url, _url: item._url }
+      ? {
+          url: import.meta.env.VITE_IMAGE_URL + "/" + item._url,
+          _url: item._url,
+        }
       : {
-          url: API_BASE_URL + "/" + item.response?.data?.fileInfo?.fileUrl,
-          _url: API_BASE_URL + "/" + item.response?.data?.fileInfo?.fileUrl,
+          url: import.meta.env.VITE_IMAGE_URL + "/" + item.response?.data?.path,
+          _url: item.response?.data?.path,
         };
   });
   emit("update:list", imgArray);
   emit("change", imgArray);
 };
 const hanldeSuccess = () => {
+  uploadChange.value = true;
   change();
 };
 

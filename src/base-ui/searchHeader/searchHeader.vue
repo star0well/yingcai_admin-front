@@ -1,27 +1,42 @@
 <template>
   <div class="header">
     <el-form :inline="true">
-      <el-form-item v-for="(searchItem, index) of props.searchList" :key="index" :label="searchItem.label">
+      <el-form-item
+        v-for="(searchItem, index) of props.searchList"
+        :key="index"
+        :label="searchItem.label"
+      >
         <el-input
           clearable
           v-if="searchItem.type == 'input'"
           v-model="form[searchItem.field]"
-          :placeholder="searchItem.placeholder">
+          :placeholder="searchItem.placeholder"
+        >
         </el-input>
-        <el-radio-group v-if="searchItem.type == 'radio'" v-model="form[searchItem.field]">
-          <el-radio v-for="item of searchItem.options" :label="item.label" :key="item.label">{{ item.text }}</el-radio>
+        <el-radio-group
+          v-if="searchItem.type == 'radio'"
+          v-model="form[searchItem.field]"
+        >
+          <el-radio
+            v-for="item of searchItem.options"
+            :label="item.label"
+            :key="item.label"
+            >{{ item.text }}</el-radio
+          >
         </el-radio-group>
         <el-select
           v-if="searchItem.type == 'select'"
           v-model="form[searchItem.field]"
           clearable
           :placeholder="searchItem.placeholder"
-          v-bind="searchItem.otherProps">
+          v-bind="searchItem.otherProps"
+        >
           <el-option
             :label="item.label"
             :value="item.value"
             :key="index"
-            v-for="(item, index) of searchItem.options"></el-option>
+            v-for="(item, index) of searchItem.options"
+          ></el-option>
         </el-select>
         <el-date-picker
           v-if="searchItem.type == 'daterange'"
@@ -32,7 +47,8 @@
           value-format="YYYY-MM-DD HH:mm:ss"
           range-separator="至"
           start-placeholder="开始日期"
-          end-placeholder="结束日期">
+          end-placeholder="结束日期"
+        >
         </el-date-picker>
       </el-form-item>
       <el-form-item>

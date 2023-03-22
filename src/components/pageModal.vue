@@ -124,7 +124,27 @@
                   >
                 </el-radio-group>
               </div>
-
+              <div v-if="formItem.type == 'datetimerange'">
+                <el-date-picker
+                  v-model="formData[formItem.field]"
+                  type="datetimerange"
+                  format="YYYY-MM-DD HH:mm:ss"
+                  value-format="YYYY-MM-DD HH:mm:ss"
+                  range-separator="至"
+                  start-placeholder="开始日期"
+                  end-placeholder="结束日期"
+                >
+                </el-date-picker>
+              </div>
+              <div v-if="formItem.type == 'datetime'">
+                <el-date-picker
+                  v-model="formData[formItem.field]"
+                  type="datetime"
+                  format="YYYY-MM-DD HH:mm:ss"
+                  value-format="YYYY-MM-DD HH:mm:ss"
+                >
+                </el-date-picker>
+              </div>
               <div class="add" v-if="formItem.type == 'addIcon'">
                 <el-icon size="32"
                   ><CirclePlus color="#409EFC" class="no-inherit"

@@ -27,11 +27,11 @@ export function debounce(func, wait, immediate) {
 }
 
 export const getImg = (str) => {
-  try {
-    return JSON.parse(str);
-  } catch (error) {
-    return [];
-  }
+  const url = str
+    .split(",")
+    .map((item) => import.meta.env.VITE_IMAGE_URL + "/" + item);
+
+  return url;
 };
 
 export const setUserInfo = (info) => {
@@ -64,7 +64,11 @@ export const getValueByStr = (str, target) => {
 };
 export const saveAs = (href, fileName, toBlob) => {
   const isBlob = href instanceof Blob || toBlob;
-  if (!fileName && typeof href === "string" && (href.startsWith("http") || href.startsWith("https"))) {
+  if (
+    !fileName &&
+    typeof href === "string" &&
+    (href.startsWith("http") || href.startsWith("https"))
+  ) {
     fileName = href.slice(href.lastIndexOf("/") + 1);
   }
   fileName = decodeURIComponent(fileName || "download");
@@ -112,7 +116,11 @@ export function dataURLToFile(dataURL, filename) {
 export const generateTree = (
   list,
   rootId = 0,
-  { idName = "area_code", parentIdName = "parent_code", childName = "children" } = {},
+  {
+    idName = "area_code",
+    parentIdName = "parent_code",
+    childName = "children",
+  } = {}
 ) => {
   if (!Array.isArray(list)) {
     new Error("type only Array");
