@@ -2,7 +2,7 @@ import request from "@/service/index";
 
 export const roleAdd = (data) => {
   return request.post({
-    url: "/role",
+    url: "/api/role",
     data,
     sucessTips: "添加成功",
     showReault: true,
@@ -11,26 +11,25 @@ export const roleAdd = (data) => {
 };
 export const roleDelete = (id) => {
   return request.delete({
-    url: "/role/" + id,
+    url: "/api/role/" + id,
   });
 };
 export const rolePatch = (data) => {
   return request.patch({
-    url: "/role/" + data.id,
+    url: "/api/role/" + data.id,
     data,
   });
 };
 
 export const roleGet = (data) => {
   return request.get({
-    url: "/role",
+    url: "/api/role",
     params: data,
   });
 };
 export const roleMenus = (data) => {
   return request.get({
-    url: "/role/menus",
+    url: "/api/role/menus",
     params: data,
   });
 };
-

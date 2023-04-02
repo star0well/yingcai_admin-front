@@ -2,7 +2,7 @@ import request from "@/service/index";
 
 export const addGoods = (data) => {
   return request.post({
-    url: "/goods",
+    url: "/api/goods",
     data,
     sucessTips: "添加成功",
     showReault: true,
@@ -11,25 +11,25 @@ export const addGoods = (data) => {
 };
 export const deleteGoods = (id) => {
   return request.delete({
-    url: "/goods/" + id,
+    url: "/api/goods/" + id,
   });
 };
 export const patchGoods = (data) => {
   return request.patch({
-    url: "/goods/" + data.id,
+    url: "/api/goods/" + data.id,
     data,
   });
 };
 
 export const getGoods = (data) => {
   return request.get({
-    url: "/goods",
+    url: "/api/goods",
     params: data,
   });
 };
 export const getAllGoods = (data) => {
   return request.get({
-    url: "/goods/list",
+    url: "/api/goods/list",
     params: data,
   });
 };

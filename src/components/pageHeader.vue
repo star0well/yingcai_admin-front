@@ -23,10 +23,7 @@
             <div class="btnItem loginOut" @click="loginOut">退出登录</div>
           </template>
           <div class="userInfo-box">
-            <img
-              :src="userInfo.avatar || './src/assets/img/avatar.png'"
-              class="portrait"
-            />
+            <img :src="userInfo.avatar || '/avatar.png'" class="portrait" />
           </div>
         </el-tooltip>
       </div>

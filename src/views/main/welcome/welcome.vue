@@ -1,7 +1,7 @@
 <template>
   <div class="welcome">
     <div class="center">
-      <el-image class="orgin" src="/assets/svg/study.jpg"></el-image>
+      <el-image class="orgin" src="/study.jpg"></el-image>
 
       <template v-for="(item, index) of iconList" :key="index">
         <el-icon size="80" class="icon" :class="`icon-${index}`">
@@ -16,6 +16,7 @@ import vueIcon from "@/assets/svg/vue.svg";
 import nestjs from "@/assets/svg/nestjs.svg";
 import react from "@/assets/svg/react.svg";
 import angular from "@/assets/svg/angular.svg";
+
 
 const iconList = [vueIcon, nestjs, react, angular];
 </script>

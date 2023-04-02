@@ -2,7 +2,7 @@ import request from "@/service/index";
 
 export const userAdd = (data) => {
   return request.post({
-    url: "/user",
+    url: "/api/user",
     data,
     sucessTips: "添加成功",
     showReault: true,
@@ -11,20 +11,19 @@ export const userAdd = (data) => {
 };
 export const userDelete = (id) => {
   return request.delete({
-    url: "/user/" + id,
+    url: "/api/user/" + id,
   });
 };
 export const userPatch = (data) => {
   return request.patch({
-    url: "/user/" + data.id,
+    url: "/api/user/" + data.id,
     data,
   });
 };
 
 export const userGet = (data) => {
   return request.get({
-    url: "/user",
+    url: "/api/user",
     params: data,
   });
 };
-
