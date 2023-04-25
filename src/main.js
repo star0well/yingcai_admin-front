@@ -5,6 +5,7 @@ import "@/global/register-el-style";
 import { useUserStore } from "@/store/user";
 import "@/assets/css/index.css";
 import App from "./App.vue";
+import "virtual:uno.css";
 
 async function bootstrap() {
   const app = createApp(App);

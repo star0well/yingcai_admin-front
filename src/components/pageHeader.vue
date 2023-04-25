@@ -1,32 +1,23 @@
 <template>
   <div class="header" id="header">
-    <div class="left">
-      <el-icon size="32"><vueIcon></vueIcon></el-icon>
-
-      <span class="c-cyan">管理系统</span>
-    </div>
-
     <div class="right">
       <div class="menu-action">
-        <el-icon size="16" v-if="!isFlod" @click="store.isFlod = true"
-          ><Fold
-        /></el-icon>
-        <el-icon size="16" v-if="isFlod" @click="store.isFlod = false"
-          ><Expand
-        /></el-icon>
+        <el-icon class="hover:cursor-pointer" size="16" v-if="!isFlod" @click="store.isFlod = true"><Fold /></el-icon>
+        <el-icon class="hover:cursor-pointer" size="16" v-if="isFlod" @click="store.isFlod = false"><Expand /></el-icon>
         <NavBreadcrumb :breadcrumbs="breadcrumbs"></NavBreadcrumb>
       </div>
-      <div class="flex">
-        <div>{{ userInfo.name }}</div>
-        <el-tooltip raw-content effect="light" append-to="body">
-          <template #content>
-            <div class="btnItem loginOut" @click="loginOut">退出登录</div>
-          </template>
-          <div class="userInfo-box">
-            <img :src="userInfo.avatar || '/avatar.png'" class="portrait" />
-          </div>
-        </el-tooltip>
-      </div>
+      <el-tooltip raw-content effect="light" append-to="body">
+        <template #content>
+          <div class="btnItem loginOut" @click="loginOut">退出登录</div>
+        </template>
+        <div class="userInfo-box">
+          <el-image :src="userInfo.avatar || defaultImage" class="portrait">
+            <template #error>
+              <el-image :src="defaultImage" />
+            </template>
+          </el-image>
+        </div>
+      </el-tooltip>
     </div>
   </div>
 </template>
@@ -34,15 +25,16 @@
 import { ref, computed } from "vue";
 import vueIcon from "@/assets/svg/vue.svg";
 
-import { useRoute, useRouter } from "vue-router";
+import { useRoute } from "vue-router";
 import NavBreadcrumb from "@/base-ui/breadcrumb/nav-breadcrumb.vue";
 import { pathMapBreadcrumbs } from "@/utils/map-menu";
 import { Expand, Fold } from "@element-plus/icons-vue";
 import { useUserStore } from "@/store/user";
+import defaultImage from "@/assets/img/avatar.png";
 const route = useRoute();
 const store = useUserStore();
 const userInfo = computed(() => store.userInfo);
-const router = useRouter();
+
 /**
  * 方法start
  * */
@@ -50,9 +42,6 @@ const loginOut = () => {
   const theme = localStorage.getItem("vueuse-color-scheme");
   window.localStorage.clear();
   theme && localStorage.setItem("vueuse-color-scheme", theme);
-  router.push({
-    path: "/login",
-  });
 };
 
 /**

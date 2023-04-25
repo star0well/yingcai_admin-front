@@ -1,6 +1,5 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import { useUserStore } from "@/store/user";
-import main from "@/views/main/main.vue";
 const routes = [
   {
     path: "/",
@@ -20,7 +19,8 @@ const routes = [
   {
     path: "/main",
     name: "main",
-    component: main,
+    component: () => import("@/views/main/main.vue"),
+
     children: [],
   },
 ];

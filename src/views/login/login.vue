@@ -7,35 +7,25 @@
       <div class="title"><span class="name"> 后台系统 </span></div>
       <el-form class="form" :model="form" :rules="rules" ref="loginform">
         <el-form-item prop="name">
-          <el-input
-            v-model.trim="form.name"
-            clearable
-            placeholder="请输入账号"
-          ></el-input>
+          <el-input v-model.trim="form.name" data-test="account" clearable placeholder="请输入账号"></el-input>
         </el-form-item>
         <el-form-item prop="password">
           <el-input
             v-model.trim="form.password"
+            data-test="password"
             clearable
             placeholder="请输入密码"
             show-password
-            type="password"
-          >
+            type="password">
           </el-input>
         </el-form-item>
-        <el-form-item
-          ><el-checkbox v-model="isRemember" label="记住密码" size="large" />
-        </el-form-item>
+        <el-form-item><el-checkbox v-model="isRemember" label="记住密码" size="large" /> </el-form-item>
         <el-form-item class="btn-box">
-          <el-button
-            @click="login"
-            style="width: 450%; height: 42px"
-            type="primary"
-          >
+          <el-button @click="login(2)" style="width: 450%; height: 42px" type="primary" data-test="btn">
             登录</el-button
           >
         </el-form-item>
-        <el-form-item class="btn-box">
+        <!-- <el-form-item class="btn-box">
           <el-button
             @click="register"
             style="width: 45%; height: 42px"
@@ -43,7 +33,7 @@
           >
             注册</el-button
           >
-        </el-form-item>
+        </el-form-item> -->
       </el-form>
     </div>
   </div>
@@ -91,9 +81,7 @@ onMounted(() => {
 const login = () => {
   userlogin(form.value).then(async (res) => {
     localCache.setCache("token", res.data.token);
-    isRemember.value
-      ? cache.setCache("userPassword", form.value)
-      : cache.deleteCatche("userPassword");
+    isRemember.value ? cache.setCache("userPassword", form.value) : cache.deleteCatche("userPassword");
     await loginStore.getUserInfoAction();
 
     router.push({
@@ -104,9 +92,7 @@ const login = () => {
 const register = () => {
   userRegister(form.value).then(async (res) => {
     localCache.setCache("token", res.data.token);
-    isRemember.value
-      ? cache.setCache("userPassword", form.value)
-      : cache.deleteCatche("userPassword");
+    isRemember.value ? cache.setCache("userPassword", form.value) : cache.deleteCatche("userPassword");
     await loginStore.getUserInfoAction();
 
     router.push({

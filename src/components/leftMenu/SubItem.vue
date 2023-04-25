@@ -9,20 +9,12 @@
           <span>{{ item.name }}</span>
         </template>
         <template v-if="item.type == 1">
-          <SubItem
-            :menu-list="item.children"
-            @clickSubItem="handleMenuItemClick"
-          ></SubItem>
+          <SubItem :menu-list="item.children" @clickSubItem="handleMenuItemClick"></SubItem>
         </template>
       </el-sub-menu>
     </template>
     <template v-else>
-      <el-menu-item
-        v-if="item.type == 2"
-        :key="item.id"
-        :index="item.id + ''"
-        @click="handleMenuItemClick(item)"
-      >
+      <el-menu-item v-if="item.type == 2" :key="item.id" :index="item.id + ''" @click="handleMenuItemClick(item)">
         <el-icon v-if="item.icon">
           <component :is="icons[item.icon]" :iconName="item.icon" />
         </el-icon>

@@ -12,8 +12,7 @@
           size="large"
           :checked="currentRoute == tag.path"
           @close="handleClose(tag)"
-          @click="hanldeClick(tag)"
-        >
+          @click="hanldeClick(tag)">
           {{ tag.name }}
         </el-tag>
       </div>
@@ -24,6 +23,9 @@
 import { pathMapToMenu } from "@/utils/map-menu";
 import { computed, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import { useUserStore } from "@/store/user";
+const store = useUserStore();
+
 const route = useRoute();
 const router = useRouter();
 const dynamicTags = ref([]);
@@ -37,13 +39,13 @@ watch(
       dynamicTags.value.push({ name: "首页", path: "/main/welcome" });
     }
     if (dynamicTags.value.map((item) => item.path).includes(newValue)) return;
-    const menu = pathMapToMenu(userMenus.value, newValue);
+    const menu = pathMapToMenu(store.userMenus, newValue);
     if (!menu) return;
     dynamicTags.value.push(menu);
   },
   {
     immediate: true,
-  }
+  },
 );
 const hanldeClick = (tag) => {
   if (tag.path == currentRoute.value) return;
@@ -67,8 +69,6 @@ const handleClose = (tag) => {
   display: flex;
 }
 .tag-list {
-  padding: 0 0 10px 0;
-  margin-bottom: 10px;
   .actice {
     color: var(--el-color-primary);
   }
